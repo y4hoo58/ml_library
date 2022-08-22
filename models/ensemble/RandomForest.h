@@ -1,0 +1,11 @@
+
+#ifndef ML_LIBRARY_RANDOMFOREST_H
+#define ML_LIBRARY_RANDOMFOREST_H
+
+
+class RandomForest {
+
+};
+
+
+#endif //ML_LIBRARY_RANDOMFOREST_H

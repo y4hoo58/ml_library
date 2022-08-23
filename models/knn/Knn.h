@@ -5,28 +5,29 @@
 
 #include "../Model.h"
 
-class kmeans_test: public Model {
+/*
+ * TODO:
+ * - Implement classification
+ * - Regression -> Simple Average or Weighted Average?
+ */
+
+class Knn: public Model {
 public:
     int k_neighbors;
     std::vector<std::vector<float>> distance_matrix;
     std::vector<std::vector<int>> neighbors;
-    kmeans_test(Data * , int);
+    Knn(Data * , int);
+
+    void fit();
+    void regression();
+    void classification();
+
+private:
 
     // Calculates distance matrix
     void calc_distances();
 
-    // Finds determined number of neighbors, including itself
+    // Finds the closest neighbors with respect to each data point
     void find_neighbors();
-
-    // Regression
-    // Average ??
-    // Weighted Average??
-    void predict();
-
-    // Implement later.
-    void classify();
-
 };
-
-
 #endif //MY_ML_KNN_H

@@ -8,11 +8,7 @@
 class Reg : public LinearModel  {
 public :
 
-
     Reg(Data *, float, float);
-
-    // Calculate the model error
-    float calc_error(std::vector<float> *,std::vector<float> *);
 
     //Training loop
     void fit_model(int);
@@ -27,11 +23,6 @@ private:
     // Predict
     void predict();
 
-    // Calculates the total gradient
-    void calc_grad();
-
-    // Calculates gradients for a row
-    float calc_row_grad(Data *,int);
 };
 
 

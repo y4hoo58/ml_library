@@ -99,6 +99,7 @@ void Data::read_csv(string _file_name ) {
 
     inputs = new vector<vector<float>>(_inputs);
     targets = new vector<float>(_targets);
+    predictions = *targets;
 
     row_num = inputs->size();
     col_num = inputs->at(0).size();

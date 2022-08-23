@@ -3,8 +3,10 @@
 #include <cmath>
 #include <vector>
 
-Kmeans::Kmeans(Data *_data, int _k_num) : Model(_data){
+Kmeans::Kmeans(Data *_data, int _k_num,int _n_init ,int _max_iter) : Model(_data){
     k_num = _k_num;
+    n_init = _n_init;
+    max_iter=_max_iter;
     centroid_delta = std::numeric_limits<float>::max();
 
     centroids=init_centroids();
@@ -58,7 +60,6 @@ void Kmeans::calc_centroids(){
     for(int i=0;i<k_num;i++){
         vector<float> _centroid(data->col_num,0.0);
         float _counter =0;
-
         // Loop over all rows.
         // Find where i == cluster number.
         // Sum all rows column wise that belongs to ith cluster.
@@ -80,10 +81,47 @@ void Kmeans::calc_centroids(){
     }
 }
 
-void Kmeans::fit(){
-    init_centroids();
-    while(centroid_delta!=0){
-        find_cluster();
-        calc_centroids();
+void Kmeans::calc_average_centroids(int _i){
+    /*
+     * If first ->> init avg_centroids vector
+     * Else ->> sum
+     */
+    if(_i==0){
+        avg_centroids = centroids;
+    }else {
+        for(int j=0;j<centroids.size();j++){
+            for(int k=0;k<centroids.at(j).size();k++){
+                avg_centroids.at(j).at(k) = avg_centroids.at(j).at(k)+centroids.at(j).at(k);
+            }
+        }
     }
+
+    // if last init ->> take average
+    if(_i == n_init-1){
+        for(int i=0;i<centroids.size();i++){
+            for(int j=0;j<centroids.at(i).size();j++){
+                avg_centroids.at(i).at(j) = avg_centroids.at(i).at(j)/(float)n_init;
+            }
+        }
+    }
+}
+
+
+void Kmeans::fit(){
+
+    for(int i=0;i<n_init;i++){
+        int _iter_count = 0;
+        init_centroids();
+        while((centroid_delta!=0)&(_iter_count<max_iter)){
+            find_cluster();
+            calc_centroids();
+            _iter_count++;
+        }
+        calc_average_centroids(i);
+    }
+}
+
+
+void Kmeans::predict() {
+
 }

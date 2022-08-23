@@ -1,10 +1,11 @@
 
 #include "Knn.h"
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
-kmeans_test::kmeans_test(Data *_data, int _k_neighbors): Model(_data){
+Knn::Knn(Data *_data, int _k_neighbors): Model(_data){
     // Set k_neighbors parameter
     k_neighbors = _k_neighbors;
 
@@ -13,16 +14,15 @@ kmeans_test::kmeans_test(Data *_data, int _k_neighbors): Model(_data){
     neighbors = _neighbors;
 }
 
-void kmeans_test::calc_distances() {
+void Knn::calc_distances() {
     // Calculate distance matrix.
     // Diagonals are zeros.
     distance_matrix =  distances.eucledian_distance(data->inputs);
 }
 
-void kmeans_test::find_neighbors() {
+void Knn::find_neighbors() {
 
     vector<float> _row(distance_matrix.at(0).size(),0.0);
-
     // For each data point
     for(int i = 0;i<data->row_num;i++){
 
@@ -33,7 +33,6 @@ void kmeans_test::find_neighbors() {
 
         // Find "k_neighbors"
         for(int j=0;j<k_neighbors;j++){
-
             // Finds min distance and its index
             float _min = _row.at(0);
             int _min_index = 0;
@@ -44,7 +43,6 @@ void kmeans_test::find_neighbors() {
                     _min_index = k;
                 }
             }
-
             // Set neighbor
             neighbors.at(i).at(j) = _min_index;
 
@@ -54,8 +52,13 @@ void kmeans_test::find_neighbors() {
     }
 }
 
+void Knn::fit(){
+    calc_distances();
+    find_neighbors();
+}
 
-void kmeans_test::predict(){
+
+void Knn::regression(){
     // Predict for each data point
     for(int i=0;i<data->predictions.size();i++){
         // Loop for each neighbors.
@@ -64,7 +67,6 @@ void kmeans_test::predict(){
         for(int j=1;j<k_neighbors;j++){
             _prediction = _prediction + data->targets->at(neighbors.at(i).at(j));
         }
-
         // Take average  and set the prediction
         data->predictions.at(i)=_prediction/(float)(k_neighbors-1);
     }
@@ -72,12 +74,6 @@ void kmeans_test::predict(){
 
 
 
-void kmeans_test::classify() {
-
-}
-
-
-
-
+void Knn::classification() {}
 
 

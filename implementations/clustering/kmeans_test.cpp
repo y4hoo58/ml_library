@@ -28,7 +28,7 @@ int main(){
     Kmeans _kmeans(&_data,_neighbor_num,_n_init,_max_iter);
     _kmeans.fit();
 
-    float _rand_index= _kmeans.metrics.rand_index(_data.targets,&_kmeans.clusters);
+    float _rand_index= _kmeans.metrics.rand_index(_data.train_y, &_kmeans.clusters);
     cout<<"Rand index is "<<_rand_index<<endl;
 
     return 0;

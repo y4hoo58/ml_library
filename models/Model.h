@@ -11,7 +11,6 @@
 class Model {
 public:
     Data *data;
-    Helpers helpers;
     Metrics metrics;
     Distances distances;
 

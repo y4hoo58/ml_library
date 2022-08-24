@@ -40,7 +40,7 @@ int main(){
      * Calculate model error
      */
 
-    float _model_error = _my_log.metrics.binary_crossentropy(_data.targets,&_data.predictions);
+    float _model_error = _my_log.metrics.binary_crossentropy(_data.train_y, &_data.train_pred);
     cout << "Model error is "<<_model_error<<endl;
 
 

@@ -10,21 +10,21 @@ Knn::Knn(Data *_data, int _k_neighbors): Model(_data){
     k_neighbors = _k_neighbors;
 
     // Initialize neighbors matrix with zeros
-    vector<vector<int>> _neighbors(_data->row_num,vector<int>(_k_neighbors,0));
+    vector<vector<int>> _neighbors(_data->train_size, vector<int>(_k_neighbors, 0));
     neighbors = _neighbors;
 }
 
 void Knn::calc_distances() {
     // Calculate distance matrix.
     // Diagonals are zeros.
-    distance_matrix =  distances.eucledian_distance(data->inputs);
+    distance_matrix =  distances.eucledian_distance(data->train_x);
 }
 
 void Knn::find_neighbors() {
 
     vector<float> _row(distance_matrix.at(0).size(),0.0);
     // For each data point
-    for(int i = 0;i<data->row_num;i++){
+    for(int i = 0;i<data->train_size; i++){
 
         // Set the row for the data point
         for(int j = 0;j<_row.size();j++){
@@ -60,15 +60,15 @@ void Knn::fit(){
 
 void Knn::regression(){
     // Predict for each data point
-    for(int i=0;i<data->predictions.size();i++){
+    for(int i=0;i<data->train_pred.size(); i++){
         // Loop for each neighbors.
         // Skips itself.
         float _prediction =0;
         for(int j=1;j<k_neighbors;j++){
-            _prediction = _prediction + data->targets->at(neighbors.at(i).at(j));
+            _prediction = _prediction + data->train_y->at(neighbors.at(i).at(j));
         }
         // Take average  and set the prediction
-        data->predictions.at(i)=_prediction/(float)(k_neighbors-1);
+        data->train_pred.at(i)= _prediction / (float)(k_neighbors - 1);
     }
 }
 

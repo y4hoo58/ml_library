@@ -8,17 +8,23 @@
 class Data {
 public:
 
-    int row_num,col_num;
+    int train_size,test_size,feature_size;
 
-    std::vector<std::vector<float>> *inputs;
-    std::vector<float> *targets;
-    std::vector<float> predictions;
+    std::vector<std::vector<float>> *train_x;
+    std::vector<float> *train_y;
+
+    std::vector<std::vector<float>> *test_x;
+    std::vector<float> *test_y;
+
+    std::vector<float> train_pred;
+    std::vector<float> test_pred;
+
 
     /*
      * There are different possibilities :
-     * - Dataset already in the ram
+     * - Dataset already in the memory
      * - Dataset in the disk, we might load it after the initialization of the Data class
-     * - We dont have targets -> Clustering
+     * - We don't have train_y -> Clustering
      */
     Data();
     Data(int,int,std::vector<std::vector<float>> *);
@@ -27,14 +33,22 @@ public:
     ~Data();
 
     void read_csv(std::string);
+    void random_split(float);
+    void interpolated_split(float);
 
     void print_inputs(int);
     void print_targets(int);
     void print_predictions(int);
 
 private:
-    int find_col_num(std::string);
+    std::vector<std::vector<float>> *data_features;
+    std::vector<float> *data_targets;
 
+
+    int find_col_num(std::string);
+    void set_elements(std::vector<std::vector<float>>*,std::vector<float>*,std::vector<int>*);
+    void select_test_indexes(std::vector<int> *,std::vector<int>*,int,int);
+    void assign_train_indexes(std::vector<int> *,std::vector<int> *,int);
 };
 
 #endif //MY_ML_DATA_H

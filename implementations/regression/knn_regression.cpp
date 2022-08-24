@@ -40,7 +40,7 @@ int main(){
     /*
      * Calculate model error
      */
-    float _model_error = knn.metrics.mse(_data.targets,&_data.predictions);
+    float _model_error = knn.metrics.mse(_data.train_y, &_data.train_pred);
     cout << "Model error is "<<_model_error<<endl;
 
 

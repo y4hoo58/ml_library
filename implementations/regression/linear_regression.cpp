@@ -11,19 +11,23 @@ using namespace std;
 int main(){
 
     /*
-     * Load the data
-     */
-    string _file_name = "/Users/yahya/Desktop/cpp_code/ml_library/implementations/regression/data/regression_data.csv";
-    Data _data;
-    _data.read_csv(_file_name);
-
-    /*
      * Set parameters
      */
     int _print_size = 5;
     int _epoch_num = 50;
     float _learning_rate = 0.01;
     float _alpha=0.1;
+    float _test_ratio = 0.2;
+
+    /*
+     * Load the data
+     */
+    string _file_name = "/Users/yahya/Desktop/cpp_code/ml_library/implementations/regression/data/regression_data.csv";
+    Data _data;
+    _data.read_csv(_file_name);
+    cout<<1<<endl;
+    _data.random_split(_test_ratio);
+    cout<<2<<endl;
 
     /*
      * Initialize model
@@ -31,6 +35,7 @@ int main(){
     Reg _my_reg(&_data,_learning_rate,_alpha);
     _my_reg.fit_model(_epoch_num);
 
+    cout<<3<<endl;
     /*
      * Print model parameters
      */
@@ -50,7 +55,7 @@ int main(){
     /*
      * Calculate model error
      */
-    float _model_error = _my_reg.metrics.mse(_data.targets,&_data.predictions);
+    float _model_error = _my_reg.metrics.mse(_data.train_y, &_data.train_pred);
     cout << "Model error is "<<_model_error<<endl;
 
 

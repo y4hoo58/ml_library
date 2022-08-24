@@ -1,5 +1,7 @@
 #include "../Model.h"
 #include "Logistic.h"
+#include "../../metrics/ClassificationMetrics.h"
+
 #include <cmath>
 #include <iostream>
 
@@ -24,7 +26,7 @@ void Logistic::fit_model(int _epoch){
         calc_grad();
         add_regularization_grad();
         update_params();
-        error = metrics.binary_crossentropy(data->train_y, &data->train_pred);
+        error = ClassificationMetrics::binary_crossentropy(data->train_y, &data->train_pred);
     }
 }
 

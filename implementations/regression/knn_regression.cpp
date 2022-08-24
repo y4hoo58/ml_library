@@ -3,11 +3,18 @@
 
 #include "../../data/Data.h"
 #include "../../models/knn/Knn.h"
+#include "../../metrics/RegressionMetrics.h"
 
 using namespace std;
 
 
 int main(){
+    /*
+     * Set parameters
+     */
+    int _print_size = 5;
+    int _k_neighbors = 10;
+    float _test_ratio = 0.2;
 
     /*
      * Load the data
@@ -15,12 +22,8 @@ int main(){
     string _file_name = "/Users/yahya/Desktop/cpp_code/ml_library/implementations/regression/data/regression_data.csv";
     Data _data;
     _data.read_csv(_file_name);
+    _data.random_split(_test_ratio);
 
-    /*
-     * Set parameters
-     */
-    int _print_size = 5;
-    int _k_neighbors = 10;
 
     /*
      * Initialize model
@@ -29,6 +32,7 @@ int main(){
 
     knn.fit();
     knn.regression();
+
 
     /*
      * Output results
@@ -40,9 +44,11 @@ int main(){
     /*
      * Calculate model error
      */
-    float _model_error = knn.metrics.mse(_data.train_y, &_data.train_pred);
-    cout << "Model error is "<<_model_error<<endl;
+    float _r2_score = RegressionMetrics::r2_score(_data.train_y,&_data.train_pred);
+    float _model_error = RegressionMetrics::mse(_data.train_y, &_data.train_pred);
 
+    cout<<"R2 score is "<<_r2_score<<endl;
+    cout << "MSE is "<<_model_error<<endl;
 
 }
 

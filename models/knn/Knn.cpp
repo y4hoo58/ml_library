@@ -17,7 +17,7 @@ Knn::Knn(Data *_data, int _k_neighbors): Model(_data){
 void Knn::calc_distances() {
     // Calculate distance matrix.
     // Diagonals are zeros.
-    distance_matrix =  distances.eucledian_distance(data->train_x);
+    distance_matrix =  Distances::eucledian_distance(data->train_x);
 }
 
 void Knn::find_neighbors() {
@@ -56,7 +56,6 @@ void Knn::fit(){
     calc_distances();
     find_neighbors();
 }
-
 
 void Knn::regression(){
     // Predict for each data point

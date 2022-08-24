@@ -38,7 +38,10 @@ Data::Data(int _row_num,int _col_num, vector<vector<float>> *_inputs,vector<floa
 }
 
 Data::~Data() {
-    delete train_x,train_y,test_x,test_y;
+    delete train_x;
+    delete train_y;
+    delete test_x;
+    delete test_y;
 }
 
 /*
@@ -165,9 +168,6 @@ void Data::random_split(float _test_ratio) {
     test_pred = _vec2;
 }
 
-void Data::interpolated_split(float _test_ratio){}
-
-
 
 
 /*
@@ -176,7 +176,7 @@ void Data::interpolated_split(float _test_ratio){}
  *
  */
 
-void Data::print_inputs(int _max_rows){
+void Data::print_inputs(int _max_rows) {
     cout<<"[OUTP] Printing "<<_max_rows<<" rows of input data: "<<endl;
 
     for(int i=0;i<_max_rows;i++){
@@ -190,7 +190,7 @@ void Data::print_inputs(int _max_rows){
     cout<<"_____________________________________"<<endl;
 }
 
-void Data::print_targets(int _max_rows){
+void Data::print_targets(int _max_rows) {
     cout<<"[OUTP] Printing "<<_max_rows<<" rows of target data: "<<endl;
 
     for(int i=0;i<_max_rows;i++){
@@ -200,7 +200,7 @@ void Data::print_targets(int _max_rows){
     cout<<"_____________________________________"<<endl;
 }
 
-void Data::print_predictions(int _max_rows){
+void Data::print_predictions(int _max_rows) {
     cout<< "[OUTP] Printing predicted data: "<<endl;
     for(int i=0;i<_max_rows;i++){
         cout << "[OUTP] Row number "<< i<< " : ";

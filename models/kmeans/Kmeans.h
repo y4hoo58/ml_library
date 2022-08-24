@@ -2,8 +2,8 @@
 #ifndef ML_LIBRARY_KMEANS_H
 #define ML_LIBRARY_KMEANS_H
 
-
 #include "../Model.h"
+
 #include <vector>
 
 /*
@@ -24,9 +24,9 @@ public:
     int k_num,n_init,max_iter;
     float centroid_delta;
 
-    vector<vector<float>> centroids;
-    vector<vector<float>> avg_centroids;
-    vector<float> clusters;
+    std::vector<std::vector<float>> centroids;
+    std::vector<std::vector<float>> avg_centroids;
+    std::vector<float> clusters;
 
     Kmeans(Data*,int,int,int);
 
@@ -34,7 +34,7 @@ public:
     void predict();
 
 private:
-    vector<vector<float>> init_centroids();
+    std::vector<std::vector<float>> init_centroids();
     void find_cluster();
     void calc_centroids();
     void calc_average_centroids(int);

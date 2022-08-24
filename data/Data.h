@@ -36,9 +36,9 @@ public:
     void random_split(float);
     void interpolated_split(float);
 
-    void print_inputs(int);
-    void print_targets(int);
-    void print_predictions(int);
+    void print_inputs(int) ;
+    void print_targets(int) ;
+    void print_predictions(int) ;
 
 private:
     std::vector<std::vector<float>> *data_features;
@@ -51,4 +51,4 @@ private:
     void assign_train_indexes(std::vector<int> *,std::vector<int> *,int);
 };
 
-#endif //MY_ML_DATA_H
+#endif //ML_LIBRARY_DATA_H

@@ -3,10 +3,9 @@
 
 #include "../../data/Data.h"
 #include "../../models/linear/Reg.h"
+#include "../../metrics/RegressionMetrics.h"
 
 using namespace std;
-
-
 
 int main(){
 
@@ -16,7 +15,7 @@ int main(){
     int _print_size = 5;
     int _epoch_num = 50;
     float _learning_rate = 0.01;
-    float _alpha=0.1;
+    float _alpha=0.5;
     float _test_ratio = 0.2;
 
     /*
@@ -25,9 +24,7 @@ int main(){
     string _file_name = "/Users/yahya/Desktop/cpp_code/ml_library/implementations/regression/data/regression_data.csv";
     Data _data;
     _data.read_csv(_file_name);
-    cout<<1<<endl;
     _data.random_split(_test_ratio);
-    cout<<2<<endl;
 
     /*
      * Initialize model
@@ -35,7 +32,7 @@ int main(){
     Reg _my_reg(&_data,_learning_rate,_alpha);
     _my_reg.fit_model(_epoch_num);
 
-    cout<<3<<endl;
+
     /*
      * Print model parameters
      */
@@ -53,10 +50,13 @@ int main(){
 
 
     /*
-     * Calculate model error
+     * Model evaluation
      */
-    float _model_error = _my_reg.metrics.mse(_data.train_y, &_data.train_pred);
-    cout << "Model error is "<<_model_error<<endl;
+    float _r2_score = RegressionMetrics::r2_score(_data.train_y,&_data.train_pred);
+    float _model_error = RegressionMetrics::mse(_data.train_y, &_data.train_pred);
+
+    cout<<"R2 score is "<<_r2_score<<endl;
+    cout << "MSE is "<<_model_error<<endl;
 
 
 }

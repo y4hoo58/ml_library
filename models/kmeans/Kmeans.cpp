@@ -3,6 +3,8 @@
 #include <cmath>
 #include <vector>
 
+using namespace std;
+
 Kmeans::Kmeans(Data *_data, int _k_num,int _n_init ,int _max_iter) : Model(_data){
     k_num = _k_num;
     n_init = _n_init;

@@ -3,15 +3,13 @@
 
 #include <vector>
 
-using namespace std;
-class Distances {
 
-public:
+namespace Distances{
 
-    vector<vector<float>> eucledian_distance(vector<vector<float>>*);
+    std::vector<std::vector<float>> eucledian_distance(std::vector<std::vector<float>>*);
 
-    vector<vector<float>> cosine_distance(vector<vector<float>> *);
-};
+    std::vector<std::vector<float>> cosine_distance(std::vector<std::vector<float>> *);
+}
 
 
 #endif //MY_ML_DISTANCES_H

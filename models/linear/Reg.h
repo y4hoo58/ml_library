@@ -27,4 +27,4 @@ private:
 };
 
 
-#endif //MY_ML_REG_H
+#endif //ML_LIBRARY_REG_H

@@ -12,4 +12,4 @@ namespace Helpers{
     float min_value(std::vector<float> *);
 }
 
-#endif //MY_ML_HELPERS_H
+#endif //ML_LIBRARY_HELPERS_H

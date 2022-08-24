@@ -8,6 +8,7 @@
 class Reg : public LinearModel  {
 public :
 
+    float r2_score;
     Reg(Data *, float, float);
 
     //Training loop

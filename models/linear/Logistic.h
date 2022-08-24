@@ -8,6 +8,8 @@
 class Logistic : public LinearModel{
 public:
 
+    float accuracy;
+
     Logistic(Data *, float, float);
 
     // Training loop
